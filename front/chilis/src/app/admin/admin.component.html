@@ -1,0 +1,145 @@
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+    <div class="container-fluid">
+  
+      <!-- Page Heading -->
+  
+      <!-- DataTales Example -->
+      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">All produit</h6>
+          </div>
+            
+          <div class="card-body">
+              <a routerLink="/addproduit" style="float: right;" class="btn btn-primary">Add produit</a>
+              <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                          <tr>
+                              <th>Nom produit</th>
+                              <th>description</th>
+                              <th>prix</th>
+                              <th>image</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                            <th>Nom produit</th>
+                            <th>description</th>
+                            <th>prix</th>
+                            <th>image</th>
+                            <th>Actions</th>
+                          </tr>
+                      </tfoot>
+                      <tbody>
+  
+                          <tr *ngFor="let item of dataArray;index as i">
+                              <td>{{item.nomProduct}}</td>
+                              <td>{{item.description}}</td>
+                              <td>{{item.prixProduct}}</td>
+                              <td>{{item.image}}</td>
+                              
+                              <td>
+                                  <button class="btn btn-success" (click)="getdata(item.nomProduct,item.description,item.prixProduct,item.image,item._id)" data-toggle="modal" data-target="#exampleModal">Update</button>
+                                 
+                                  <button class="btn btn-danger" (click)="delete(item._id,i)">Delete</button>
+                              </td>
+                          </tr>
+                          
+                          
+                          
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  
+  </div>
+  
+  
+  
+  
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="w3-main" style="margin-left:340px;margin-right:40px ">
+   
+            <div class="container">
+          
+              <form #f="ngForm" (ngSubmit)="update(f)">
+            <!-- firstName validation start here -->
+                <div class="form-group">
+            
+                  <label for="exampleFormControlInput1">Nom</label>
+                  <input type="text" class="form-control" placeholder="Title" required name="nomProduct" #nomProduct="ngModel" ngModel minlength="2" maxlength="20">
+                </div>
+                <div class="alert alert-danger" *ngIf="nomProduct.errors?.['required'] && nomProduct.touched">
+                  title is required
+                </div>
+                <div class="alert alert-danger" *ngIf="nomProduct.errors?.['minlength'] && nomProduct.touched">
+                  title must be minimum 2 caractere
+                </div>
+            <!-- lastName validation end here -->
+            
+            <!-- lastName validation start here -->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">description</label>
+                    <input type="text" class="form-control" placeholder="description" required name="description" #description="ngModel" minlength="2" maxlength="20" ngModel>
+                  </div>
+                  <div class="alert alert-danger" *ngIf="description.errors?.['required'] && description.touched">
+                    description is required
+                  </div>
+                  <div class="alert alert-danger" *ngIf="description.errors?.['minlength'] && description.touched">
+                    description must be minimum 20 caractere
+                  </div>
+            <!-- lastName validation end here -->
+            
+           
+            <!-- prix validation start here -->
+                 <div class="form-group">
+                    <label for="exampleFormControlInput1">prix</label>
+                    <input type="number" class="form-control" placeholder="prix" required name="prixProduct" #prixProduct="ngModel" ngModel>
+                  </div>
+                  <div class="alert alert-danger" *ngIf="prixProduct.errors?.['required'] && prixProduct.touched">
+                    prix is required
+                  </div>
+             <!-- prix validation end here -->     
+            
+            
+             <!-- image validation start here -->
+            
+                  <div class="form-group">
+                    <label>image4</label>
+                    <input type="file" class="form-control " laceholder="image" required name="image" #image="ngModel" ngModel>
+                    
+                </div>
+                  <div class="alert alert-danger" *ngIf="image.errors?.['required']&& image.touched">
+                    image is required
+                  </div>
+        
+                  <div class="alert alert-success" *ngIf="messageSuccess">
+                      {{messageSuccess}}
+                  </div>      
+  
+                 <button class="btn btn-primary" [disabled]="f.invalid" routerLink="/admin">Update </button>
+                </form>
+  
+  
+  
+            <!-- form update end here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  

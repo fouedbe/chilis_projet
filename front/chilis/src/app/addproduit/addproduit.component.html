@@ -1,0 +1,70 @@
+<div class="w3-main" style="margin-left:340px;margin-right:40px ">
+ 
+    <div class="container">
+  
+      <form #f="ngForm" (ngSubmit)="add(f)">
+    <!-- firstName validation start here -->
+        <div class="form-group">
+    
+          <label for="exampleFormControlInput1">Nom produit</label>
+          <input type="text" class="form-control" placeholder="nomProduct" required name="nomProduct" #nomProduct="ngModel" ngModel minlength="2" maxlength="20">
+        </div>
+        <div class="alert alert-danger" *ngIf="nomProduct.errors?.['required'] && nomProduct.touched">
+          title is required
+        </div>
+        <div class="alert alert-danger" *ngIf="nomProduct.errors?.['minlength'] && nomProduct.touched">
+          title must be minimum 2 caractere
+        </div>
+    <!-- lastName validation end here -->
+    
+    <!-- lastName validation start here -->
+        <div class="form-group">
+            <label for="exampleFormControlInput1">description</label>
+            <input type="text" class="form-control" placeholder="description" required name="description" #description="ngModel" minlength="2" maxlength="20" ngModel>
+          </div>
+          <div class="alert alert-danger" *ngIf="description.errors?.['required'] && description.touched">
+            description is required
+          </div>
+          <div class="alert alert-danger" *ngIf="description.errors?.['minlength'] && description.touched">
+            description must be minimum 20 caractere
+          </div>
+    <!-- lastName validation end here -->
+    
+   
+    <!-- prix validation start here -->
+         <div class="form-group">
+            <label for="exampleFormControlInput1">prix</label>
+            <input type="number" class="form-control" placeholder="prix" required name="prixProduct" #prixProduct="ngModel" ngModel>
+          </div>
+          <div class="alert alert-danger" *ngIf="prixProduct.errors?.['required'] && prixProduct.touched">
+            prix is required
+          </div>
+     <!-- prix validation end here -->     
+    
+    
+     <!-- image validation start here -->
+    
+          <div class="form-group">
+            <label>image4</label>
+            <input type="file" class="form-control " laceholder="image" required name="image" #image="ngModel" ngModel>
+            
+        </div>
+          <div class="alert alert-danger" *ngIf="image.errors?.['required']&& image.touched">
+            image is required
+          </div>
+    <!-- Phone validation end here -->
+          <div class="alert alert-danger" *ngIf="messageErr">
+            {{messageErr}}
+          </div>
+    
+       <button class="btn btn-primary" [disabled]="f.invalid">Add produit</button>
+      </form>
+    
+    
+     </div>
+    
+      
+    
+  </div>
+    
+  
